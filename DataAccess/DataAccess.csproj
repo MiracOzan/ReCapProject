@@ -157,6 +157,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IBrandDal.cs" />
     <Compile Include="Abstract\ICarDal.cs" />
+    <Compile Include="Abstract\ICarImageDal.cs" />
     <Compile Include="Abstract\IColorDal.cs" />
     <Compile Include="Abstract\ICustomerDal.cs" />
     <Compile Include="Abstract\IRentalDal.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Concrete\EntityFramework\Contexts\RentACarContext.cs" />
     <Compile Include="Concrete\EntityFramework\Repository\EfBrandDal.cs" />
     <Compile Include="Concrete\EntityFramework\Repository\EfCarDal.cs" />
+    <Compile Include="Concrete\EntityFramework\Repository\EfCarImageDal.cs" />
     <Compile Include="Concrete\EntityFramework\Repository\EfColorDal.cs" />
     <Compile Include="Concrete\EntityFramework\Repository\EfCustomerDal.cs" />
     <Compile Include="Concrete\EntityFramework\Repository\EfRentalDal.cs" />

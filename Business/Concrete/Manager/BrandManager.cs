@@ -9,6 +9,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete.Manager
 {
@@ -21,7 +22,7 @@ namespace Business.Concrete.Manager
             _brandDal = brandDal;
         }
 
-        [ValidationAspects(typeof(BrandValidator))]
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);

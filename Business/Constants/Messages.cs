@@ -39,6 +39,23 @@ namespace Business.Constants
         public static string DeletedUser = "Kullanıcı başarıyla silindi.";
         public static string UpdatedUser = "Kullanıcı başarıyla güncellendi.";
 
+        // Car İmage
+        public static string AddedCarImage = "Araba için yüklenilen resim başarıyla eklendi.";
+        public static string DeletedCarImage = "Arabanın resmi başarıyla silindi.";
+        public static string UpdatedCarImage = "Araba için yüklenilen resim başarıyla güncellendi.";
+        public static string FailedCarImageAdd = "Bir araba 5'den fazla resme sahip olamaz.";
 
+        public static string UserNotFound = "Kullanıcı bulunamadı.";
+        public static string SuccessfulLogin = "Baraşıyla giriş yapıldı";
+        public static string PasswordError = "Parola hatası!";
+        public static string UserAlreadyExists = "Kullanıcı mevcut!";
+        public static string AccessTokenCreated = "Token oluşturuldu.";
+
+        public static string AuthorizationDenied = "Yetkiniz yok.";
+        public static string UserRegistered = "Kayıt oldu.";
+
+
+        public static string FailedRentalAddOrUpdate { get; }
+        public static string ReturnedRental { get; }
     }
 }

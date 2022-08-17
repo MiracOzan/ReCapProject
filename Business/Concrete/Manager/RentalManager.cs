@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business.Abstract;
+﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text;
 
-namespace Business.Concrete.Manager
+namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        readonly IRentalDal _rentalDal;
+        IRentalDal _rentalDal;
 
         public RentalManager(IRentalDal rentalDal)
         {
@@ -24,10 +27,19 @@ namespace Business.Concrete.Manager
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
+            IResult result = BusinessRules.Run(CheckCarExistInRentalList(rental));
+
+            if (result != null)
+            {
+                return result;
+            }
+
+
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.AddedRental);
         }
-      
+
+        [SecuredOperation("admin")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
@@ -41,16 +53,29 @@ namespace Business.Concrete.Manager
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(I => I.Id == id));
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetCarDetails(filter), Messages.ReturnedRental);
         }
 
         [ValidationAspect(typeof(RentalValidator))]
-        public IResult Update(Rental Rental)
+        public IResult Update(Rental rental)
         {
-
-            _rentalDal.Update(Rental);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages.UpdatedRental);
+        }
 
+        private IResult CheckCarExistInRentalList(Rental rental)
+        {
+            if (rental.ReturnDate > DateTime.Now && _rentalDal.GetCarDetails(I => I.CarId == rental.CarId).Count > 0)
+            {
+                return new ErrorResult(Messages.FailedRentalAddOrUpdate);
+            }
+
+            return new SuccessResult();
         }
     }
 }
