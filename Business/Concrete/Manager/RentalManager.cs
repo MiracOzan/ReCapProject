@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,7 +21,7 @@ namespace Business.Concrete.Manager
             _rentalDal = rentalDal;
         }
 
-      
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);
@@ -43,7 +44,7 @@ namespace Business.Concrete.Manager
             return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id));
         }
 
-    
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental Rental)
         {
 

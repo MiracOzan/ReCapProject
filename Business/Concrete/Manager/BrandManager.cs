@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,12 +21,14 @@ namespace Business.Concrete.Manager
             _brandDal = brandDal;
         }
 
+        [ValidationAspects(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
             return new SuccessResult(Messages.AddedBrand);
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
