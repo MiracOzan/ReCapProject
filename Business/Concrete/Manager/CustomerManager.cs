@@ -1,4 +1,6 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Constants;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,36 +12,43 @@ namespace Business.Concrete.Manager
 {
     public class CustomerManager
     {
-        private readonly ICustomerDal _customerDal;
+        ICustomerDal _customerDal;
 
         public CustomerManager(ICustomerDal customerDal)
         {
             _customerDal = customerDal;
         }
 
-        public void Add(Customer Customer)
+      
+        public IResult Add(Customer customer)
         {
-            _customerDal.Add(Customer);
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.AddedCustomer);
+        }
+    
+        public IResult Delete(Customer customer)
+        {
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.DeletedCustomer);
         }
 
-        public void Update(Customer Customer)
+        public IDataResult<List<Customer>> GetAll()
         {
-            _customerDal.Update(Customer);
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
 
-        public void Delete(Customer Customer)
+        public IDataResult<Customer> GetById(int id)
         {
-            _customerDal.Delete(Customer);
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == id));
         }
 
-        public List<Customer> GetAll()
+        
+        public IResult Update(Customer customer)
         {
-            return _customerDal.GetAll();
-        }
 
-        public List<Customer> GetById(int id)
-        {
-            return _customerDal.Get(c => c.Id == id);
+            _customerDal.Update(customer);
+            return new SuccessResult(Messages.UpdatedCustomer);
+
         }
     }
 }

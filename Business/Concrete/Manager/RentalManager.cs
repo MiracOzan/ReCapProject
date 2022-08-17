@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -11,36 +13,43 @@ namespace Business.Concrete.Manager
 {
     public class RentalManager : IRentalService
     {
-        private readonly IRentalDal _rentalDal;
+        readonly IRentalDal _rentalDal;
 
-        public RentalManager(IRentalDal RentalDal)
+        public RentalManager(IRentalDal rentalDal)
         {
-            _rentalDal = RentalDal;
+            _rentalDal = rentalDal;
         }
 
-        public void Add(Rental Rental)
+      
+        public IResult Add(Rental rental)
         {
-            _rentalDal.Add(Rental);
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.AddedRental);
+        }
+      
+        public IResult Delete(Rental rental)
+        {
+            _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.DeletedRental);
         }
 
-        public void Update(Rental Rental)
+        public IDataResult<List<Rental>> GetAll()
         {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+        }
+
+        public IDataResult<Rental> GetById(int id)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == id));
+        }
+
+    
+        public IResult Update(Rental Rental)
+        {
+
             _rentalDal.Update(Rental);
-        }
+            return new SuccessResult(Messages.UpdatedRental);
 
-        public void Delete(Rental Rental)
-        {
-            _rentalDal.Delete(Rental);
-        }
-
-        public List<Rental> GetAll()
-        {
-            return _rentalDal.GetAll();
-        }
-
-        public List<Rental> GetById(int id)
-        {
-            return _rentalDal.Get(c => c.Id == id);
         }
     }
 }
