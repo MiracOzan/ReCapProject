@@ -41,11 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBrandService.cs" />
+    <Compile Include="Abstract\ICarService.cs" />
+    <Compile Include="Abstract\IColorServicecs.cs" />
+    <Compile Include="Abstract\ICustomerService.cs" />
+    <Compile Include="Abstract\IRentalService.cs" />
+    <Compile Include="Concrete\Manager\BrandManager.cs" />
+    <Compile Include="Concrete\Manager\CarManager.cs" />
+    <Compile Include="Concrete\Manager\ColorManager.cs" />
+    <Compile Include="Concrete\Manager\CustomerManager.cs" />
+    <Compile Include="Concrete\Manager\RentalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{DA3E4722-41EC-41FF-A864-7E1BBB6EEC1D}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{F418F7DD-7DEC-492B-9CF5-10C6D7D6FE93}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{7F0E81DF-AB71-4755-8BF6-23BCDACEB6C3}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
