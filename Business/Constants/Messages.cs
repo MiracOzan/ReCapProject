@@ -33,5 +33,12 @@ namespace Business.Constants
         public static string DeletedRental = "Araba Kiralama işlemi iptal edildi.";
         public static string UpdatedRental = "Araba Kiralama işlemi güncellendi.";
 
+
+        // User
+        public static string AddedUser = "Kullanıcı başarıyla eklendi.";
+        public static string DeletedUser = "Kullanıcı başarıyla silindi.";
+        public static string UpdatedUser = "Kullanıcı başarıyla güncellendi.";
+
+
     }
 }

@@ -46,11 +46,13 @@
     <Compile Include="Abstract\IColorServices.cs" />
     <Compile Include="Abstract\ICustomerService.cs" />
     <Compile Include="Abstract\IRentalService.cs" />
+    <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="Concrete\Manager\BrandManager.cs" />
     <Compile Include="Concrete\Manager\CarManager.cs" />
     <Compile Include="Concrete\Manager\ColorManager.cs" />
     <Compile Include="Concrete\Manager\CustomerManager.cs" />
     <Compile Include="Concrete\Manager\RentalManager.cs" />
+    <Compile Include="Concrete\Manager\UserManager.cs" />
     <Compile Include="Constants\Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
