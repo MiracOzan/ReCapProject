@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Abstract;
 using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete.Manager
 {
-    public class ColorManager
+    public class ColorManager : IColorServices
     {
         IColorDal _colorDal;
 

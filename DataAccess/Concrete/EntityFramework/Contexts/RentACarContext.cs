@@ -1,5 +1,7 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.Security.JWT;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework.Contexts
@@ -8,7 +10,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=RentACar; Trusted_Connection = true");
+            optionsBuilder.UseSqlServer(@"Server=MIRAÇ; Database=RentACar; Trusted_Connection = true");
         }
 
         public DbSet<Car> Cars { get; set; }
