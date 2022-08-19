@@ -51,5 +51,9 @@ namespace Business.Concrete.Manager
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(c => c.Id == id));
         }
+        public IDataResult<Brand> GetByName(string Name)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(c => c.BrandName == Name));
+        }
     }
 }
